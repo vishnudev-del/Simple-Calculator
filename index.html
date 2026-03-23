@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stylish Calculator</title>
+
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+            font-family: Arial;
+        }
+
+        .calculator {
+            background: #07072c;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(57, 96, 109, 0.3);
+        }
+
+        #display {
+            width: 100%;
+            box-sizing: border-box;
+            height: 60px;
+            font-size: 22px;
+            margin-bottom: 15px;
+            text-align: right;
+            padding: 10px;
+            border: none;
+            border-radius: 10px;
+            outline: none;
+            color: white;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 60px);
+            gap: 10px;
+        }
+
+        button {
+            height: 60px;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            background: #2d2d44;
+            color: white;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background: #44446a;
+        }
+
+        .operator {
+            background: #ff9f43;
+        }
+
+        .operator:hover {
+            background: #ff7f00;
+        }
+
+        .equal {
+            background: #00c853;
+        }
+
+        .equal:hover {
+            background: #00a844;
+        }
+
+        .clear {
+            background: #ff3d00;
+        }
+
+        .clear:hover {
+            background: #d32f2f;
+        }
+        .back {
+            background: #607d8b;
+        }
+        .back:hover {
+            background: #455a64;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="calculator">
+    <input type="text" id="display" disabled>
+
+    <div class="buttons">
+        <button class="clear" onclick="clearDisplay()">C</button>
+        <button class="operator" onclick="addValue('^')">^</button>
+        <button class="operator" onclick="addValue('%')">%</button>
+        <button class="operator" onclick="addValue('/')">/</button>
+
+        <button onclick="addValue('7')">7</button>
+        <button onclick="addValue('8')">8</button>
+        <button onclick="addValue('9')">9</button>
+        <button class="operator" onclick="addValue('*')">*</button>
+
+        <button onclick="addValue('4')">4</button>
+        <button onclick="addValue('5')">5</button>
+        <button onclick="addValue('6')">6</button>
+        <button class="operator" onclick="addValue('-')">-</button>
+        
+        <button onclick="addValue('1')">1</button>
+        <button onclick="addValue('2')">2</button>
+        <button onclick="addValue('3')">3</button>
+        <button class="operator" onclick="addValue('+')">+</button>
+        
+
+        <button onclick="addValue('0')">0</button>
+        <button onclick="addValue('.')">.</button>
+        <button class="back" onclick="backspace()">⌫</button>
+        <button class="equal" onclick="calculate()">=</button>
+
+    </div>
+</div>
+
+<script>
+function addValue(val) {
+    document.getElementById("display").value += val;
+}
+
+function clearDisplay() {
+    document.getElementById("display").value = "";
+}
+
+function calculate() {
+    let exp = document.getElementById("display").value;
+    // Convert ^ to JS exponentiation operator **
+    exp = exp.replace(/\^/g, "**");
+    try {
+        document.getElementById("display").value = eval(exp);
+    } catch {
+        alert("Error");
+    }
+}
+function backspace() {
+    let exp = document.getElementById("display").value;
+    document.getElementById("display").value = exp.slice(0, -1);
+}
+</script>
+
+</body>
+</html>
